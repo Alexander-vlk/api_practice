@@ -24,3 +24,43 @@ class Subject(AutoDateMixin):
         
     def __str__(self):
         return self.title
+
+
+class Course(AutoDateMixin):
+    """Модель курсов"""
+    
+    owner = models.ForeignKey(
+        User,
+        related_name='courses',
+        on_delete=models.CASCADE,
+        verbose_name='Владелец',
+    )
+    
+    subject = models.ForeignKey(
+        Subject,
+        related_name='courses',
+        on_delete=models.CASCADE,
+        verbose_name='Предмет',
+    )
+    
+    title = models.CharField(
+        max_length=500,
+        verbose_name='Название',
+    )
+    slug = models.SlugField(
+        max_length=500,
+        unique=True,
+    )
+    
+    overview = models.CharField(
+        max_length=2000,
+        verbose_name='Описание',
+    )
+    
+    class Meta:
+        verbose_name = 'Курс'
+        verbose_name_plural = 'Курсы'
+        ordering = ['-updated_at']
+        
+    def __str__(self):
+        return self.title
