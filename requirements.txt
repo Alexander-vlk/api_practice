@@ -10,4 +10,4 @@ redis
 django-redisboard
 djangorestframework
 requests
-environ
+django-environ
