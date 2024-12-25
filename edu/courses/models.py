@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 from utils.mixins.auto_date import AutoDateMixin
 
@@ -95,4 +97,30 @@ class Module(AutoDateMixin):
         verbose_name = 'Модуль'
         verbose_name_plural = 'Модули'
         ordering = ['-updated_at']
-        
+
+
+class Content(AutoDateMixin):
+    """Модель контента"""
+    
+    module = models.ForeignKey(
+        Module,
+        related_name='contents',
+        on_delete=models.CASCADE,
+        verbose_name='Модуль',
+    )
+    
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        verbose_name='Тип контента',
+    )
+    
+    object_id = models.PositiveIntegerField(
+        verbose_name='ID объекта',
+    )
+    
+    item = GenericForeignKey('content_type', 'object_id')
+    
+    class Meta:
+        verbose_name = 'Контент'
+        verbose_name_plural = 'Контенты'
