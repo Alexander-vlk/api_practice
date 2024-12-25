@@ -87,13 +87,6 @@ class Module(AutoDateMixin):
         verbose_name='Текстовое содержимое',
     )
     
-    image = models.ImageField(
-        upload_to=settings.MEDIA_ROOT,
-        null=True,
-        blank=True,
-        verbose_name='Изображение',
-    )
-    
     order = models.PositiveBigIntegerField(
         verbose_name='Номер модуля',
     )
