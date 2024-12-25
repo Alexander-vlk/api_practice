@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from courses.models import Course, Subject
+from courses.models import Course, Module, Subject
 
 
 @admin.register(Subject)
@@ -12,6 +12,10 @@ class SubjectAdmin(admin.ModelAdmin):
     search_fields = ['title', 'slug']
     
     
+class ModuleInline(admin.StackedInline):
+    model = Module
+    
+    
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     """Админ для Course"""
@@ -20,3 +24,5 @@ class CourseAdmin(admin.ModelAdmin):
     list_display_links = ['title']
     raw_id_fields = ['owner', 'subject']
     search_fields = ['title', 'owner', 'overview']
+    prepopulated_fields = {"slug": ["title"]}
+    inlines = [ModuleInline]
