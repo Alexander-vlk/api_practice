@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 from utils.mixins.auto_date import AutoDateMixin
 
@@ -64,3 +65,41 @@ class Course(AutoDateMixin):
         
     def __str__(self):
         return self.title
+
+
+class Module(AutoDateMixin):
+    """Модель для модуля курса"""
+    
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name='Курс',
+    )
+    
+    overview = models.CharField(
+        max_length=500,
+        verbose_name='Описание',
+    )
+    
+    text = models.CharField(
+        max_length=5000,
+        blank=True,
+        verbose_name='Текстовое содержимое',
+    )
+    
+    image = models.ImageField(
+        upload_to=settings.MEDIA_ROOT,
+        null=True,
+        blank=True,
+        verbose_name='Изображение',
+    )
+    
+    order = models.PositiveBigIntegerField(
+        verbose_name='Номер модуля',
+    )
+    
+    class Meta:
+        verbose_name = 'Модуль'
+        verbose_name_plural = 'Модули'
+        ordering = ['-updated_at']
+        
