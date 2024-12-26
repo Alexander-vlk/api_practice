@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 from utils.mixins.auto_date import AutoDateMixin
+from utils.mixins.base_item import BaseItem
 
 
 class Subject(AutoDateMixin):
@@ -124,3 +125,10 @@ class Content(AutoDateMixin):
     class Meta:
         verbose_name = 'Контент'
         verbose_name_plural = 'Контенты'
+
+
+class Text(BaseItem):
+    content = models.CharField(
+        max_length=5000,
+        verbose_name='Текст',
+    )
