@@ -132,6 +132,13 @@ class Content(AutoDateMixin):
         verbose_name='ID объекта',
     )
     
+    order = OrderField(
+        blank=True,
+        default=0,
+        for_fields=['module'],
+        verbose_name='Порядок элемента',
+    )
+    
     item = GenericForeignKey('content_type', 'object_id')
     
     class Meta:
