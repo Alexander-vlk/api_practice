@@ -14,14 +14,14 @@ DEBUG = bool(env('DEBUG'))
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
 
 INSTALLED_APPS = [
+    'courses.apps.CoursesConfig',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'courses.apps.CoursesConfig',
 ]
 
 MIDDLEWARE = [
