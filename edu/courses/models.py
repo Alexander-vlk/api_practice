@@ -148,3 +148,7 @@ class Image(BaseItem):
     )
     
     
+class Video(BaseItem):
+    url = models.URLField(
+        verbose_name='URL',
+    )
