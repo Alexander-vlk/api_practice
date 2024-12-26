@@ -17,12 +17,12 @@
                 <li>
                     <form action="{% url 'logout' %}" method='post'>
                         {% csrf_token %}
-                        <input type='submit' value='Выйти'>
+                        <input type='submit' class='btn' value='Выйти'>
                     </form>
                 </li>
                 {% else %}
                 <li>
-                    <a href="{% url 'login' %}">Авторизация</a>
+                    <a href="{% url 'login' %}" class='btn'>Авторизация</a>
                 </li>
                 {% endif %}
             </ul>

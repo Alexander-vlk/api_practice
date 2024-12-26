@@ -5,13 +5,13 @@
 {% endblock title %}
 
 {% block content %}
-<h2>Мои курсы</h2>
 <section>
+    <h2>Мои курсы</h2>
     {% for course in courses %}
         <article>
             <h4>{{ course.title }}</h4>
             <a href="{% url 'course_edit' course.pk %}">Редактировать</a>
-            <form action="{% url 'course_delete' course.pk %}" method='post'>
+            <form action="{% url 'course_delete' course.pk %}" method=>
                 {% csrf_token %}
                 <input type="submit" value="Удалить">
             </form>
