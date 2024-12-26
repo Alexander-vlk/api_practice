@@ -100,7 +100,7 @@ class Module(AutoDateMixin):
     class Meta:
         verbose_name = 'Модуль'
         verbose_name_plural = 'Модули'
-        ordering = ['-updated_at']
+        ordering = ['order']
         
     def __str__(self):
         return f'{self.order}: {self.title}'
@@ -144,6 +144,7 @@ class Content(AutoDateMixin):
     class Meta:
         verbose_name = 'Контент'
         verbose_name_plural = 'Контенты'
+        ordering = ['order']
 
 
 class Text(BaseItem):
