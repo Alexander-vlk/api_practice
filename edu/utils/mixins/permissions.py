@@ -1,4 +1,7 @@
-class OwnerMixin:
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
+
+class OwnerMixin(LoginRequiredMixin, PermissionRequiredMixin):
     """Миксин для фильтрации по пользователю"""
     
     def get_queryset(self):
@@ -6,7 +9,7 @@ class OwnerMixin:
         return queryset.filter(owner=self.request.user)
     
 
-class OwnerEditMixin:
+class OwnerEditMixin(LoginRequiredMixin, PermissionRequiredMixin):
     """Миксин для установки владельца"""
     
     def form_valid(self, form):
