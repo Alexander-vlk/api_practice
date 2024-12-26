@@ -11,10 +11,7 @@
         <article>
             <h4>{{ course.title }}</h4>
             <a href="{% url 'course_edit' course.pk %}">Редактировать</a>
-            <form action="{% url 'course_delete' course.pk %}" method=>
-                {% csrf_token %}
-                <input type="submit" value="Удалить">
-            </form>
+            <a href="{% url 'course_delete' course.pk %}">Удалить</a>
         </article>
     {% empty %}
         <p>У Вас еще нет курсов.</p>
