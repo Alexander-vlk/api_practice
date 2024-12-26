@@ -132,3 +132,12 @@ class Text(BaseItem):
         max_length=5000,
         verbose_name='Текст',
     )
+    
+    
+class File(BaseItem):
+    file = models.FileField(
+        upload_to=settings.MEDIA_ROOT / 'files',
+        verbose_name='Файл',
+    )
+    
+    
