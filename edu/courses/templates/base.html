@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static "css/base.css" %}>
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <header>
+        <a href="/head" class="logo"><h1>Edu</h1></a>
+        <nav>
+            <ul>
+                {% if request.user.is_authenticated %}
+                <li>
+                    <a href="">Log out</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="">Log in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            {% block domready %}
+            {% endblock domready %}
+        })
+    </script>
+</body>
+</html>
