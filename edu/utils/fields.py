@@ -12,7 +12,7 @@ class OrderField(models.PositiveBigIntegerField):
         
     def pre_save(self, model_instance, add):
         """Расширение метода pre_save"""
-        if not getattr(model_instance, self.attname):
+        if getattr(model_instance, self.attname):
             return super().pre_save(model_instance, add)
         
         queryset = self.model.objects.all()
