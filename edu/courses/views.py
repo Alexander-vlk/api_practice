@@ -14,6 +14,7 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
     """View для списка курсов пользователя"""
     
     model = Course
+    context_object_name = 'courses'
     template_name = 'courses/manage/course/list.html'
     permission_required = 'courses.view_course'
     
