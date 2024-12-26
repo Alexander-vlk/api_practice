@@ -346,3 +346,9 @@ ul {
     background: rgb(194, 18, 18);
     color: #fff;
 }
+
+.create-new-course {
+    display: fixed;
+    bottom: 1em;
+    left: 2em;
+}
