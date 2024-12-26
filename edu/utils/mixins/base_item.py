@@ -5,6 +5,8 @@ from utils.mixins.auto_date import AutoDateMixin
 
 
 class BaseItem(AutoDateMixin):
+    """Абстрактная модель BaseItem для содержимого курса"""
+    
     owner = models.ForeignKey(
         User,
         related_name='%(class)s_related',

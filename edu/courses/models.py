@@ -134,6 +134,8 @@ class Content(AutoDateMixin):
 
 
 class Text(BaseItem):
+    """Модель Text для контента"""
+    
     content = models.CharField(
         max_length=5000,
         verbose_name='Текст',
@@ -141,6 +143,8 @@ class Text(BaseItem):
     
     
 class File(BaseItem):
+    """Модель File для контента"""
+
     file = models.FileField(
         upload_to=settings.MEDIA_ROOT / 'files',
         verbose_name='Файл',
@@ -148,6 +152,8 @@ class File(BaseItem):
     
     
 class Image(BaseItem):
+    """Модель Image для контента"""
+    
     image = models.ImageField(
         upload_to=settings.MEDIA_ROOT / 'course_images',
         verbose_name='Изображение',
@@ -155,6 +161,8 @@ class Image(BaseItem):
     
     
 class Video(BaseItem):
+    """Модель Video для контента"""
+    
     url = models.URLField(
         verbose_name='URL',
     )
