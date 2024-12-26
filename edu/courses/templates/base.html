@@ -15,11 +15,14 @@
             <ul>
                 {% if request.user.is_authenticated %}
                 <li>
-                    <a href="">Log out</a>
+                    <form action="{% url 'logout' %}" method='post'>
+                        {% csrf_token %}
+                        <input type='submit' value='Выйти'>
+                    </form>
                 </li>
                 {% else %}
                 <li>
-                    <a href="">Log in</a>
+                    <a href="{% url 'login' %}">Авторизация</a>
                 </li>
                 {% endif %}
             </ul>
