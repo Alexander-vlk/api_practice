@@ -10,11 +10,12 @@ from courses.models import Course
 from courses.mixins import OwnerCourseMixin, OwnerCourseEditMixin
 
 
-class ManageCourseListView(ListView):
+class ManageCourseListView(OwnerCourseMixin, ListView):
     """View для списка курсов пользователя"""
     
     model = Course
     template_name = 'courses/manage/course/list.html'
+    permission_required = 'courses.view_course'
     
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -22,12 +23,13 @@ class ManageCourseListView(ListView):
 
 
 class CourseCreateView(OwnerCourseEditMixin, CreateView):
-    pass
+    permission_required = 'courses.add_course'
 
 
 class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
-    pass
+    permission_required = 'courses.change_course'
 
 
 class CourseDeleteView(OwnerCourseMixin, DeleteView):
     template_name = 'courses/manage/course/delete.html'
+    permission_required = 'courses.delete_course'
