@@ -37,6 +37,12 @@ main {
     justify-content: center;
 }
 
+article {
+    margin: 1rem 0;
+    border: 1px solid #00CF91;
+    padding: 1rem;
+}
+
 .login {
     min-width: 400px;
     padding: 1rem;
