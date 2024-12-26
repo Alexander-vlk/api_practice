@@ -80,6 +80,11 @@ class Module(AutoDateMixin):
         verbose_name='Курс',
     )
     
+    title = models.CharField(
+        max_length=250,
+        verbose_name='Название',
+    )
+    
     overview = models.CharField(
         max_length=500,
         verbose_name='Описание',
