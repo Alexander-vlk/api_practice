@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
+from utils.fields import OrderField
 from utils.mixins.auto_date import AutoDateMixin
 from utils.mixins.base_item import BaseItem
 
@@ -90,14 +91,19 @@ class Module(AutoDateMixin):
         verbose_name='Текстовое содержимое',
     )
     
-    order = models.PositiveBigIntegerField(
-        verbose_name='Номер модуля',
+    order = OrderField(
+        blank=True,
+        for_fields=['course'],
+        verbose_name='Порядок модуля',
     )
     
     class Meta:
         verbose_name = 'Модуль'
         verbose_name_plural = 'Модули'
         ordering = ['-updated_at']
+        
+    def __str__(self):
+        return f'{self.order}: {self.title}'
 
 
 class Content(AutoDateMixin):
