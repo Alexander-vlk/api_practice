@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Авторизация
+{% endblock title %}
+
+{% block content %}
+<h2>log in</h2>
+<section>
+    {% if form.errors %}
+    <div class="errors">
+        <p>Неверное имя пользователя или пароль.</p>
+    </div>
+    {% endif %}
+    <form action="{% url 'login' %}" method='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Войти">
+    </form>
+</section>
+{% endblock content %}
