@@ -141,3 +141,10 @@ class File(BaseItem):
     )
     
     
+class Image(BaseItem):
+    image = models.ImageField(
+        upload_to=settings.MEDIA_ROOT / 'course_images',
+        verbose_name='Изображение',
+    )
+    
+    
