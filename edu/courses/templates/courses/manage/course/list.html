@@ -13,6 +13,9 @@
             <a href="{% url 'course_edit' course.pk %}">Редактировать</a>
             <a href="{% url 'course_delete' course.pk %}">Удалить</a>
             <a href="{% url 'course_module_update' course.pk %}">Редактировать модули</a>
+            {% if course.modules.count %}
+                <a href="{% url 'module_content_list' course.modules.first.id %}">Управление контентом</a>
+            {% endif %}
         </article>
     {% empty %}
         <p>У Вас еще нет курсов.</p>
