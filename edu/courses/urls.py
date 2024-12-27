@@ -24,6 +24,5 @@ urlpatterns = [
         'module/<int:id>/delete/',
         views.ContentDeleteView.as_view(),
         name='module_content_delete',
-    )
-
+    ),
 ]
