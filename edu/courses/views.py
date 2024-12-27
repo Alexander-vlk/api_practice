@@ -27,19 +27,27 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
 
 
 class CourseCreateView(OwnerCourseEditMixin, CreateView):
+    """View для создания курса"""
+    
     permission_required = 'courses.add_course'
 
 
 class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
+    """View для обновления курса"""
+    
     permission_required = 'courses.change_course'
 
 
 class CourseDeleteView(OwnerCourseMixin, DeleteView):
+    """View для удаления курса"""
+    
     template_name = 'courses/manage/course/delete.html'
     permission_required = 'courses.delete_course'
 
 
 class CourseModuleTemplateView(TemplateResponseMixin, View):
+    """View для набора форм модулей к курсу"""
+    
     template_name = 'courses/manage/module/formset.html'
     course = None
     
