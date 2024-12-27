@@ -76,6 +76,7 @@ class Module(AutoDateMixin):
     
     course = models.ForeignKey(
         Course,
+        related_name='modules',
         on_delete=models.CASCADE,
         verbose_name='Курс',
     )
