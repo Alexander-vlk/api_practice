@@ -5,7 +5,7 @@ from django.views.generic.edit import (
     DeleteView,
     UpdateView,
 )
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.list import ListView
 
 from courses.forms import ModuleFormSet
@@ -63,4 +63,15 @@ class CourseModuleTemplateView(TemplateResponseMixin, View):
         return self.render_to_response({
             'course': self.course,
             'formset': formset,
+        })
+        
+    def post(self, request, *args, **kwargs):
+        formsset = self.get_formset(data=request.POST)
+        if formsset.is_valid():
+            formsset.save()
+            return redirect('manage_course_list')
+        
+        return self.render_to_response({
+            'course': self.course,
+            'formset': self.formset,
         })
