@@ -12,6 +12,7 @@
             <h4>{{ course.title }}</h4>
             <a href="{% url 'course_edit' course.pk %}">Редактировать</a>
             <a href="{% url 'course_delete' course.pk %}">Удалить</a>
+            <a href="{% url 'course_module_update' course.pk %}">Редактировать модули</a>
         </article>
     {% empty %}
         <p>У Вас еще нет курсов.</p>
