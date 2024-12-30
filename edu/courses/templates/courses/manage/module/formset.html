@@ -5,9 +5,8 @@
 {% endblock title %}
 
 {% block aside %}
-<a href=""><h1>{{ course.title }}</h1></a>
+<h1 style='color: #fff'>Курс <a href="{% url 'manage_course_list' %}">{{ course.title }}</a></h1>
 {% endblock aside %}
-
 
 {% block content %}
 <section>
