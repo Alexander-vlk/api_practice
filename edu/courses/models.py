@@ -161,6 +161,9 @@ class Text(BaseItem):
         verbose_name='Текст',
     )
     
+    def __str__(self):
+        return self.content
+    
     
 class File(BaseItem):
     """Модель File для контента"""
@@ -169,6 +172,9 @@ class File(BaseItem):
         upload_to=settings.MEDIA_ROOT / 'files',
         verbose_name='Файл',
     )
+    
+    def __str__(self):
+        return self.file.url
     
     
 class Image(BaseItem):
@@ -179,6 +185,9 @@ class Image(BaseItem):
         verbose_name='Изображение',
     )
     
+    def __str__(self):
+        return self.image.url
+    
     
 class Video(BaseItem):
     """Модель Video для контента"""
@@ -186,3 +195,6 @@ class Video(BaseItem):
     url = models.URLField(
         verbose_name='URL',
     )
+    
+    def __str__(self):
+        return self.url
