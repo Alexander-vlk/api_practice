@@ -8,7 +8,7 @@
 
 {% block aside %}
 {% with course=module.course %}
-<ul class="modules">
+<ul class="modules" id='modules'>
     {% for m in course.modules.all %}
         <li data-id='{{ m.id }}' {% if m == module %} class='selected' {% endif %}>
             <a href="{% url 'module_content_list' m.id %}">
@@ -82,3 +82,31 @@
 </section>
 {% endwith %}
 {% endblock content %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5sortable/0.13.3/
+html5sortable.min.js"></script>
+{% endblock js %}
+
+{% block domready %}
+const options = {
+    method: 'POST',
+    mode: 'same-origin',
+};
+const moduleOrderUrl = '{% url 'module_order' %}';
+
+sortable('#modules', {
+    forcePlaceholderSize: true,
+    placeholderClass: 'placeholder',
+})[0].addEventListener('sortupdate', (e) => {
+    let modulesOrder = [];
+    const modules = document.querySelectorAll('#modules li');
+    modules.forEach((module, index) => {
+        modulesOrder[module.dataset.id] = index;
+        module.querySelector('.order').innerHTML = index + 1;
+        options['body'] = JSON.stringify(modulesOrder);
+        console.log(modulesOrder)
+        fetch(moduleOrderUrl, options);
+    })
+})
+{% endblock domready %}

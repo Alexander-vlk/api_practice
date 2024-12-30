@@ -194,7 +194,11 @@ class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     """View для изменения порядка модулей"""
     
     def post(self, request):
-        for id, order in self.request_json.items():
+        print(self.request_json)
+        for id, order in enumerate(self.request_json):
+            if not order:
+                continue
+            
             Module.objects.filter(
                 id=id,
                 course__owner=request.user,
@@ -208,7 +212,10 @@ class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     """View для изменения порядка контента в модуле"""
     
     def post(self, request):
-        for id, order in self.request_json.items():
+        for id, order in enumerate(self.request_json):
+            if not order:
+                continue
+            
             Content.objects.filter(
                 id=id,
                 module__course__owner=request.user,
