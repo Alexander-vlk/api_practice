@@ -30,21 +30,22 @@ ul {
 main {
     min-height: 50vh;
     width: 100%;
-    max-width: 1200px;
     margin: 0 auto;
+}
+
+aside {
+    background-color: #1E3C00;
+    padding: 1rem
+}
+
+aside a {
+    color: #fff;
 }
 
 article {
     margin: 1rem 0;
     border: 1px solid #00CF91;
     padding: 1rem;
-}
-
-.login {
-    min-width: 400px;
-    padding: 1rem;
-    box-shadow: 0 1px 6px -4px #000;
-    border-radius: 10px;
 }
 
 input[type='text'], input[type='password'], input[type='email'] {
@@ -82,4 +83,22 @@ input[type='text'], input[type='password'], input[type='email'] {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.login {
+    min-width: 400px;
+    padding: 1rem;
+    box-shadow: 0 1px 6px -4px #000;
+    border-radius: 10px;
+}
+
+.modules p {
+    margin: .5rem 0;
+    padding-left: 1rem;
+    font-size: 14px;
 }

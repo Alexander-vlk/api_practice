@@ -6,26 +6,32 @@
 Модуль {{ module.order|add:1 }}: {{ module.title }}
 {% endblock title %}
 
+{% block aside %}
+{% with course=module.course %}
+<ul class="modules">
+    {% for m in course.modules.all %}
+        <li data-id='{{ m.id }}' {% if m == module %} class='selected' {% endif %}>
+            <a href="{% url 'module_content_list' m.id %}">
+                <span>
+                    Модуль <span class='order'>{{ m.order|add:1 }}</span>
+                </span>
+                <br>
+                <p> {{ m.title }}</p>
+            </a>
+        </li>
+    {% empty %}
+        <li>У вас 0 модулей</li>
+    {% endfor %}
+</ul>
+{% endwith %}
+{% endblock aside %}
+
+
 {% block content %}
 {% with course=module.course %}
 <section>
     <h1>Курс {{ course.title }}</h1>
     <article>
-        <ul class="modules">
-            {% for m in course.modules.all %}
-                <li data-id='{{ m.id }}' {% if m == module %} class='selected' {% endif %}>
-                    <a href="{% url 'module_content_list' m.id %}">
-                        <span>
-                            Модуль <span class='order'>{{ m.order|add:1 }}</span>
-                        </span>
-                        <br>
-                        {{ m.title }}
-                    </a>
-                </li>
-            {% empty %}
-                <li>У вас 0 модулей</li>
-            {% endfor %}
-        </ul>
         <p>
             <a href="{% url 'course_module_update' course.id %}">
             Редактировать модули
@@ -35,7 +41,7 @@
     <article>
         <h2>Модуль {{ module.order|add:1 }}: {{ module.title }}</h2>
         <h3>Содержимое модуля</h3>
-        <div class="container">
+        <div>
             {% for content in module.contents.all %}
                 <div data-id='{{ content.id }}'>
                         <p>{{ content.item }} ({{ content.item|model_name }})</p>
@@ -49,20 +55,20 @@
             <p>Этот модуль не содержит контента</p>
             {% endfor %}
         </div>
-        <div class="container">
+        <div>
             <h3>Добавить контент</h3>
             <ul class='content-types'>
                 <li>
-                    <a href="[% url 'module_content_create' module.id 'text' %]">Текст</a>
+                    <a href="{% url 'module_content_create' module.id 'text' %}">Текст</a>
                 </li>
                 <li>
-                    <a href="[% url 'module_content_create' module.id 'image' %]">Изображение</a>
+                    <a href="{% url 'module_content_create' module.id 'image' %}">Изображение</a>
                 </li>
                 <li>
-                    <a href="[% url 'module_content_create' module.id 'video' %]">Видео</a>
+                    <a href="{% url 'module_content_create' module.id 'video' %}">Видео</a>
                 </li>
                 <li>
-                    <a href="[% url 'module_content_create' module.id 'file' %]">Файл</a>
+                    <a href="{% url 'module_content_create' module.id 'file' %}">Файл</a>
                 </li>
             </ul>
         </div>        
