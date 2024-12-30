@@ -4,10 +4,15 @@
 Редактирование {{ course.title }}
 {% endblock title %}
 
+{% block aside %}
+<a href=""><h1>{{ course.title }}</h1></a>
+{% endblock aside %}
+
+
 {% block content %}
 <section>
-    <h1>Редактирование модулей курса {{ course.title }}</h1>
-    <div class="container">
+    <h2>Редактирование модулей курса </h2>
+    <div>
         <h2>Модули курса</h2>
         <form method="post" action='{% url "course_module_update" course.pk %}'>
             {{ formset }}
