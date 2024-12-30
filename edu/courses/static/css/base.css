@@ -112,3 +112,8 @@ footer {
     padding-left: 1rem;
     font-size: 14px;
 }
+
+.selected {
+    background: #00CF91;
+    color: #fff;
+}
