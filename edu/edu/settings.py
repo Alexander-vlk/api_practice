@@ -79,6 +79,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/courses/user/list'
+
 INTERNAL_IPS = env('ALLOWED_HOSTS').split(',')
 
 LANGUAGE_CODE = 'ru'
