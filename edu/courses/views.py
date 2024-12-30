@@ -1,3 +1,5 @@
+from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
+
 from django.apps import apps
 from django.forms.models import modelform_factory
 from django.urls import reverse_lazy
@@ -186,3 +188,17 @@ class ModuleContentListView(TemplateResponseMixin, View):
             course__owner=request.user,
         )
         return self.render_to_response({'module': module})
+
+
+class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    """View для изменения порядка модулей"""
+    
+    def post(self, request):
+        for id, order in self.request_json.items():
+            Module.objects.filter(
+                id=id,
+                course__owner=request.user,
+            ).update(
+                order=order,
+            )
+        return self.render_json_object_response({'saved': 'OK'})
