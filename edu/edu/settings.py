@@ -14,7 +14,7 @@ DEBUG = bool(env('DEBUG'))
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
 
 INSTALLED_APPS = [
-    'courses.apps.CoursesConfig',
+    'courses.apps.CoursesConfig',   
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'debug_toolbar',
+    
+    'students.apps.StudentsConfig',
 ]
 
 MIDDLEWARE = [
