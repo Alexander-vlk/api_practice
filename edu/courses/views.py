@@ -1,9 +1,11 @@
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 
 from django.apps import apps
+from django.db.models import Count
 from django.forms.models import modelform_factory
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateResponseMixin, View
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import (
     CreateView,
     DeleteView,
@@ -13,8 +15,42 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.list import ListView
 
 from courses.forms import ModuleFormSet
-from courses.models import Content, Course, Module
+from courses.models import Content, Course, Module, Subject
 from courses.mixins import OwnerCourseMixin, OwnerCourseEditMixin
+
+
+class CourseListView(TemplateResponseMixin, View):
+    """View списка курсов"""
+    
+    model = Course
+    template_name = 'courses/course/list.html'
+    
+    def get(self, request, subject=None):
+        subjects = Subject.objects.annotate(
+            total_courses=Count('courses'),
+        )
+        courses = Course.objects.annotate(
+            total_modules=Count('modules'),
+        )
+        
+        if subject:
+            subject = get_object_or_404(Subject, slug=subject)
+            courses = courses.filter(subject=subject)
+            
+        return self.render_to_response(
+            {
+                'subjects': subjects,
+                'subject': subject,
+                'courses': courses,
+            },
+        )
+
+
+class CourseDetailView(DetailView):
+    """View для отображения детальной информации о курсе"""
+    
+    model = Course
+    template_name = 'courses/course/detail.html'
 
 
 class ManageCourseListView(OwnerCourseMixin, ListView):
