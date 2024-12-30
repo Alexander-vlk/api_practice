@@ -23,7 +23,7 @@ header > a {
     color: #fff;
 }
 
-header > nav > ul {
+ul {
     list-style: none;
 }
 
@@ -32,9 +32,6 @@ main {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 article {
@@ -78,4 +75,11 @@ input[type='text'], input[type='password'], input[type='email'] {
 .btn-success {
     color: #fff;
     background: #00CF91;
+}
+
+.center-form {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
