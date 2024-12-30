@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ object.title }}
+{% endblock title %}
+
+{% block aside %}
+<h1 style='color: #fff'><a href="{% url 'course_detail' object.slug %}">{{ object.title }}</a></h1>
+{% endblock aside %}
+
+{% block content %}
+{% with subject=object.subject %}
+    <section class='module'>
+        <h2>Описание</h2>
+        <a href="{% url 'course_list_subject' subject.slug %}">
+            {{ subject.title }}
+        </a>
+        <p>
+            Всего модулей: {{ object.modules.count }}
+        </p>
+        <p>
+            Владелец: {{ object.owner.get_full_name }}
+        </p>
+        {{ object.overview|linebreaks }}
+    </section>
+{% endwith %}
+{% endblock content %}
+

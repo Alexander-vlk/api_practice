@@ -50,7 +50,7 @@
                 <p>
                     <a href="{% url 'course_list_subject' subject.slug %}">
                         Всего модулей: {{ course.total_modules }}
-                        Владелец: {{ course.owner }}
+                        Владелец: {{ course.owner.get_full_name }}
                     </a>
                 </p>
             {% endwith %}
