@@ -97,16 +97,16 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
         return apps.get_model(app_label='courses', model_name=model_name)
     
     def get_form(self, model, *args, **kwargs):
-        form = modelform_factory(
+        Form = modelform_factory(
             model,
             exclude=[
                 'owner',
                 'order',
                 'created_at',
                 'updated_at',
-            ]
+            ],
         )
-        return form(*args, **kwargs)
+        return Form(*args, **kwargs)
     
     def dispatch(self, request, module_id,  model_name, id=None):
         self.module = get_object_or_404(
@@ -126,7 +126,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
         return super().dispatch(request, module_id, model_name, id)
     
     def get(self, request, module_id, model_name, id=None):
-        form = self.get_form(self.model, isinstance=self.obj)
+        form = self.get_form(self.model, instance=self.obj)
         return self.render_to_response({
             'form': form,
             'object': self.obj,
@@ -135,7 +135,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
     def post(self, request, module_id, model_name, id=None):
         form = self.get_form(
             self.model,
-            isinstance=self.obj,
+            instance=self.obj,
             data=request.POST,
             files=request.FILES,
         )
