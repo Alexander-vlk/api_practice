@@ -28,11 +28,16 @@
             </ul>
         </nav>
     </header>
-
-    <main>
-        {% block content %}
-        {% endblock content %}
-    </main>
+    
+    <div class="container">
+        <aside>
+            {% block aside %}{% endblock aside %}
+        </aside>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+    </div>
 
     <footer>
 
