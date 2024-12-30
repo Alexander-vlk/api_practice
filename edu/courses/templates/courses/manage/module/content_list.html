@@ -38,14 +38,12 @@
         <div class="container">
             {% for content in module.contents.all %}
                 <div data-id='{{ content.id }}'>
-                    {% with item = content.item %}
-                        <p>{{ item }} ({{ item|model_name }})</p>
-                        <a href="{% url 'module_content_update' module.id item|model_name item.id %}">Редактировать</a>
+                        <p>{{ content.item }} ({{ content.item|model_name }})</p>
+                        <a href="{% url 'module_content_update' module.id content.item|model_name content.item.id %}">Редактировать</a>
                         <form action="{% url 'module_content_delete' content.id %}" method='post'>
                             {% csrf_token %}
                             <input type="submit" class='btn btn-danger' value="Удалить">
                         </form>
-                    {% endwith %}
                 </div>
             {% empty %}
             <p>Этот модуль не содержит контента</p>
