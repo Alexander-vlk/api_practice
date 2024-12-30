@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if subject %}
+    Курсы по теме {{ subject.title }}
+{% else %}
+    Все курсы
+{% endif %}
+{% endblock title %}
+
+{% block aside %}
+
+{% endblock aside %}
+
+{% block content %}
+<section>
+    <h1>
+        {% if subject %}
+            Курсы по теме {{ subject.title }}
+        {% else %}
+            Все курсы <span><a href="{% url 'manage_course_list' %}">(мои курсы)</a></span>
+        {% endif %}
+    </h1>
+    <article>
+        <h3>Предметы</h3>
+        <ul id="modules">
+            <li {% if not subject %}class='btn btn-success selected'{% endif %}>
+                <a href="{% url 'course_list' %}">Все курсы</a>
+            </li>
+            {% for subj in subjects %}
+            <li {% if subject == subj %}class='btn btn-success selected'{% endif %}>
+                <a href="{% url 'course_list_subject' subj.slug %}">{{ subj.title }}</a>
+            </li>
+            <br>
+            <span>
+                Всего курсов: {{ subj.total_courses }} 
+            </span>
+            {% endfor %}
+        </ul>
+    </article>
+    <article class='module'>
+        <h2>Курсы</h2>
+        {% for course in courses %}
+            {% with subject=course.subject %}
+                <h3>
+                    <a href="{% url 'course_detail' course.slug %}">
+                        {{ course.title }}
+                    </a>
+                </h3>
+                <p>
+                    <a href="{% url 'course_list_subject' subject.slug %}">
+                        Всего модулей: {{ course.total_modules }}
+                        Владелец: {{ course.owner }}
+                    </a>
+                </p>
+            {% endwith %}
+        {% endfor %}
+    </article>
+</section>
+{% endblock content %}

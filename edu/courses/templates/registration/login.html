@@ -11,14 +11,14 @@
         <p>Неверное имя пользователя или пароль.</p>
     </div>
     {% endif %}
-    <div class="container">
+    <div>
         <form action="{% url 'login' %}" method='POST' class='login'>
             {% csrf_token %}
-            <div class="container">
+            <div>
                 <label for="username-input">Имя пользователя</label>
                 <div id='username-input'>{{ form.username }}</div>
             </div>
-            <div class="cnotainer">
+            <div>
                 <label for="password-input">Пароль</label>
                 <div id='password-input'>{{ form.password }}</div>
             </div>

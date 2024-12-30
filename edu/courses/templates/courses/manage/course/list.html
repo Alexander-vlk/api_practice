@@ -6,7 +6,7 @@
 
 {% block content %}
 <section>
-    <h2>Мои курсы</h2>
+    <h2>Мои курсы <span><a href="{% url 'course_list' %}">(все курсы)</a></span></h2>
     {% for course in courses %}
         <article>
             <h4>{{ course.title }}</h4>
