@@ -44,12 +44,18 @@
         <div>
             {% for content in module.contents.all %}
                 <div data-id='{{ content.id }}'>
+                    {% if content.item|model_name == 'image' %}
+                        <img src="{{content.item}}" alt="{{content.item|model_name}}">
+                    {% else %}
                         <p>{{ content.item }} ({{ content.item|model_name }})</p>
+                    {% endif %}
+                    <p>
                         <a href="{% url 'module_content_update' module.id content.item|model_name content.item.id %}">Редактировать</a>
-                        <form action="{% url 'module_content_delete' content.id %}" method='post'>
-                            {% csrf_token %}
-                            <input type="submit" class='btn btn-danger' value="Удалить">
-                        </form>
+                    </p>
+                    <form action="{% url 'module_content_delete' content.id %}" method='post'>
+                        {% csrf_token %}
+                        <input type="submit" class='btn btn-danger' value="Удалить">
+                    </form>
                 </div>
             {% empty %}
             <p>Этот модуль не содержит контента</p>
