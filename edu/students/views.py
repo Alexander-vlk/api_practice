@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, FormView
 from django.views.generic.list import ListView
 from django.contrib.auth import authenticate, login
@@ -54,3 +55,27 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(students__in=[self.request.user])
+
+
+class StudentCourseDetailView(DetailView):
+    """View детальной информации о курсе, на который зачислен студент"""
+    
+    model = Course
+    template_name = 'students/course/detail.html'
+    
+    def get_queryset(self):
+        queryset =  super().get_queryset()
+        return queryset.filter(students__in=[self.request.user])
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        course = self.get_object()
+        
+        if 'module_id' in self.kwargs:
+            context['module'] = course.modules.get(
+                id=self.kwargs['module_id'],
+            )
+        else:
+            context['module'] = course.modules.all()
+        
+        return context
