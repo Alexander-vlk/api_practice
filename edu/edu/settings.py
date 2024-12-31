@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'debug_toolbar',
+    'embed_video',
     
     'students.apps.StudentsConfig',
 ]
