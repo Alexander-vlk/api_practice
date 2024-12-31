@@ -1,6 +1,8 @@
 import environ
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -81,7 +83,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/courses/user/list'
+LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
 
 INTERNAL_IPS = env('ALLOWED_HOSTS').split(',')
 
