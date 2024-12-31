@@ -56,6 +56,12 @@ class Course(AutoDateMixin):
         max_length=500,
         unique=True,
     )
+    students = models.ManyToManyField(
+        User,
+        related_name='courses_joined',
+        blank=True,
+        verbose_name='Студенты',
+    )
     
     overview = models.CharField(
         max_length=2000,
