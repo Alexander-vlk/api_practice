@@ -1,9 +1,11 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
+from django.views.generic.list import ListView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from courses.models import Course
 from students.forms import CourseEnrollForm
 
 
@@ -41,3 +43,14 @@ class StudentEnrollCourseView(LoginRequiredMixin, FormView):
     
     def get_success_url(self):
         return reverse_lazy('student_course_detail', args=[self.course.id])
+
+
+class StudentCourseListView(LoginRequiredMixin, ListView):
+    """View списка курсов, на которые зачислен студент"""
+    
+    model = Course
+    template_name = 'students/course/list.html'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(students__in=[self.request.user])
