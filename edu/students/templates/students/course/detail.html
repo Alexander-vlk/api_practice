@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ object.title }}
+{% endblock title %}
+
+{% block aside %}
+<a href="">
+    <h1>{{ module.title }}</h1>
+</a>
+<ul id="modules">
+    {% for m in object.modules.all %}
+        <li data-id='{{ m.id }}' {% if m == module %} class='selected' {% endif %}>
+            <a href="{% url 'student_course_detail_module' object.id m.id %}">
+                <span>
+                    Модуль <span class='order'>{{ m.order|add:1 }}</span>
+                </span>
+                <br>
+                <p>{{ m.title }}</p>
+            </a>
+        </li>
+    {% empty %}
+    <p style='color: #fff'>Пока не добавлено ни одного модуля</p>
+    {% endfor %}
+</ul>
+{% endblock aside %}
+
+{% block content %}
+<section>
+    {% for content in module.contents.all %}
+        <h2>{{ content.item.title }}</h2>
+        {{ content.item.render }}
+    {% endfor %}
+</section>
+{% endblock content %}
