@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.loader import render_to_string
 
 from utils.mixins.auto_date import AutoDateMixin
 
@@ -21,3 +22,11 @@ class BaseItem(AutoDateMixin):
     
     class Meta:
         abstract = True
+    
+    def render(self):
+        return render_to_string(
+            f'courses/content/{self._meta.model_name}.html',
+            {
+                'item': self,
+            },
+        )
