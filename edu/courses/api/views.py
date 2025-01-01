@@ -9,3 +9,10 @@ class SubjectListView(generics.ListAPIView):
     
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+
+
+class SubjectDetailView(generics.RetrieveAPIView):
+    """API-эндпоинт получения детальной информации о предмете"""
+    
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSerializer
