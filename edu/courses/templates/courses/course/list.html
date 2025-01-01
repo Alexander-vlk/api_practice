@@ -9,7 +9,21 @@
 {% endblock title %}
 
 {% block aside %}
-
+<h3 style='color: #fff'>Предметы</h3>
+<ul id="modules">
+    <li {% if not subject %}class='btn btn-success selected'{% endif %}>
+        <a href="{% url 'course_list' %}">Все курсы</a>
+    </li>
+    {% for subj in subjects %}
+    <li {% if subject == subj %}class='btn btn-success selected'{% endif %}>
+        <a href="{% url 'course_list_subject' subj.slug %}">{{ subj.title }}</a>
+    </li>
+    <br>
+    <span style='color: #fff'>
+        Всего курсов: {{ subj.total_courses }} 
+    </span>
+    {% endfor %}
+</ul>
 {% endblock aside %}
 
 {% block content %}
@@ -21,22 +35,6 @@
             Все курсы <span><a href="{% url 'manage_course_list' %}">(мои курсы)</a></span>
         {% endif %}
     </h1>
-    <article>
-        <h3>Предметы</h3>
-        <ul id="modules">
-            <li {% if not subject %}class='btn btn-success selected'{% endif %}>
-                <a href="{% url 'course_list' %}">Все курсы</a>
-            </li>
-            {% for subj in subjects %}
-            <li {% if subject == subj %}class='btn btn-success selected'{% endif %}>
-                <a href="{% url 'course_list_subject' subj.slug %}">{{ subj.title }}</a>
-            </li>
-            <br>
-            <span>
-                Всего курсов: {{ subj.total_courses }} 
-            </span>
-            {% endfor %}
-        </ul>
     </article>
     <article class='module'>
         <h2>Курсы</h2>

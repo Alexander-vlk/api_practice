@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <a href="/head" class="logo"><h1>Edu</h1></a>
+        <a href="{% url 'course_list' %}" class="logo"><h1>Edu</h1></a>
         <nav>
-            <ul>
+            <ul class='horizontal-menu'>
                 {% if request.user.is_authenticated %}
                 <li>
                     <form action="{% url 'logout' %}" method='post'>
@@ -24,7 +24,18 @@
                 <li>
                     <a href="{% url 'login' %}" class='btn'>Авторизация</a>
                 </li>
+                <li>
+                    <a href="{% url 'register' %}" class='btn'>Регистрация</a>
+                </li>
                 {% endif %}
+                {% if request.user.is_superuser %}
+                    <li>
+                        <a class='btn btn-danger' href="{% url 'admin:index' %}">Админ</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'course_list' %}" class="btn">Все курсы</a>
+                </li>
             </ul>
         </nav>
     </header>
