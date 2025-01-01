@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
+from rest_framework.authentication import BaseAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -23,6 +24,8 @@ class SubjectDetailView(generics.RetrieveAPIView):
 
 class CourseEnrollView(APIView):
     """API-эндпоинт зачисления студента на курс"""
+    
+    authentication_classes = [BaseAuthentication]
     
     def post(self, request, pk, format=None):
         course = get_object_or_404(Course, pk=pk)
