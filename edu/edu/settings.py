@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     
     'debug_toolbar',
     'embed_video',
+    'rest_framework',
     
     'students.apps.StudentsConfig',
 ]
@@ -41,6 +42,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest.framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ],
+}
 
 ROOT_URLCONF = 'edu.urls'
 
